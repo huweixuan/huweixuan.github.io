@@ -32,8 +32,7 @@
 			'position': 'normal'
 		}
 
-		this.option = option;
-		var _opt = this.option = $.extend(this.option, defaultOption);
+		var _opt = this.option = $.extend({}, defaultOption, option);
 		var _pool = this.pool = pool;
 
 		this.$el = $('<li></li>').text(_opt.text).css({
@@ -52,12 +51,13 @@
 		//todo 增加animate&speed&position
 		var self = this;
 		var interval = self.option.time - currentTime;
+		var el = self.$el;
 		if (interval < 0) {
 			return
 		}
 		self.timer = setTimeout(function() {
-			self.$el.show().animate({
-				'left': -100
+			el.show().animate({
+				'left': -el.width()
 			}, 8000);
 		}, interval * 1000);
 	}
